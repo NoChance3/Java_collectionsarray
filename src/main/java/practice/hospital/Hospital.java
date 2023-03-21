@@ -1,23 +1,48 @@
 package practice.hospital;
 
+import java.text.DecimalFormat;
+import java.util.regex.Matcher;
+
 public class Hospital {
 
     public static float[] generatePatientsTemperatures(int patientsCount) {
-        return new float[0];
+        float[] temp = new float[patientsCount];
+        for(int i = 0; i< temp.length; i++){
+            float value = (float) (32 + Math.random()*8);
+            temp[i] = value;
+        }
+
+        return temp;
     }
 
     public static String getReport(float[] temperatureData) {
-        /*
-        TODO: Напишите код, который выводит среднюю температуру по больнице,количество здоровых пациентов,
-            а также температуры всех пациентов.
-            Округлите среднюю температуру с помощью Math.round до 2 знаков после запятой,
-            а температуры каждого пациента до 1 знака после запятой
-        */
+        float[] a = temperatureData;
+        float ba = 0;
+        int da = 1;
+        String ff = "";
+        String tt = "";
+        DecimalFormat dF = new DecimalFormat( "#.##" );
+        for(int i = 0; i < a.length ; i++){
+            ba += a[i];
+            if(i == a.length-1){
+                ff = ff.concat(String.valueOf(a[i]));
+            }
+            else{
+                ff = ff.concat(String.valueOf(a[i]) +" ");
+            }
+            if(a[i] >= 36.2 && a[i] <= 36.9){
+                da++;
+            }
+        }
+
+        ba = ba/ a.length;
+
+
 
         String report =
-            "Температуры пациентов: " + 1 +
-            "\nСредняя температура: " + 0 +
-            "\nКоличество здоровых: " + 0;
+            "Температуры пациентов: " + ff+
+            "\nСредняя температура: " + dF.format(ba) +
+            "\nКоличество здоровых: " + da;
 
         return report;
     }
